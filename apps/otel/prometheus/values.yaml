@@ -4,3 +4,5 @@ prometheus:
       - web.enable-remote-write-receiver
     extraArgs:
       enable-feature: exemplar-storage
+  prometheus-node-exporter:
+    enabled: false
