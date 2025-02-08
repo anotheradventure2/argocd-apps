@@ -1,3 +1,3 @@
-tempo:
-  usage_report:
-    reporting_enabled: false
+tempo-dep:
+  tempo:
+    reportingEnabled: false
