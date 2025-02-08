@@ -22,9 +22,9 @@ alloy:
 
         prometheus.scrape "prometheus" {
           targets = [
-              { "__address__" = "argocd-server-metrics:8083" },
-              { "__address__" = "argocd-repo-server-metrics:8084" },
-              { "__address__" = "argocd-application-controller-metrics:8082" },
+              { "__address__" = "argocd-server-metrics.argocd.svc.cluster.local:8083" },
+              { "__address__" = "argocd-repo-server-metrics.argocd.svc.cluster.local:8084" },
+              { "__address__" = "argocd-application-controller-metrics.argocd.svc.cluster.local:8082" },
           ]
           metrics_path = "/metrics"
           forward_to = [prometheus.remote_write.default.receiver]
@@ -42,7 +42,7 @@ alloy:
 
         prometheus.remote_write "default" {
           endpoint {
-            url = "http://prometheus:9090/api/v1/write"
+            url = "http://prometheus-server.argocd-apps.svc.cluster.local:9090/api/v1/write"
           }
         }
 

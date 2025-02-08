@@ -4,5 +4,7 @@ prometheus:
       - web.enable-remote-write-receiver
     extraArgs:
       enable-feature: exemplar-storage
+  kube-state-metrics:
+    enabled: false
   prometheus-node-exporter:
     enabled: false
