@@ -1,0 +1,6 @@
+prometheus:
+  server:
+    extraFlags:
+      - web.enable-remote-write-receiver
+    extraArgs:
+      enable-feature: exemplar-storage
