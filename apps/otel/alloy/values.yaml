@@ -31,14 +31,13 @@ alloy:
           job_name = "scraper.remote.node_exporter"
         }
 
-        // PROCESSING
-        otelcol.exporter.prometheus "default" {
-          forward_to = [prometheus.remote_write.default.receiver
-        }
-
         // EXPORTERS
         otelcol.exporter.debug "default" {
           verbosity = "detailed"
+        }
+
+        otelcol.exporter.prometheus "default" {
+          forward_to = [prometheus.remote_write.default.receiver
         }
 
         prometheus.remote_write "default" {
