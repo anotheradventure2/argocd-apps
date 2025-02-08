@@ -15,7 +15,7 @@ alloy:
           grpc { }
 
           output {
-            metrics = [otelcol.exporter.prometheus.default.input, otelcol.exporter.debug.default.input]
+            // metrics = [otelcol.exporter.prometheus.default.input, otelcol.exporter.debug.default.input]
             traces  = [otelcol.exporter.otlp.tempo.input]
           }
         }
