@@ -36,6 +36,10 @@ alloy:
           verbosity = "detailed"
         }
 
+        otelcol.exporter.prometheus "default" {
+          forward_to = [prometheus.remote_write.default.receiver]
+        }
+
         prometheus.remote_write "default" {
           endpoint {
             url = "http://prometheus:9090/api/v1/write"
