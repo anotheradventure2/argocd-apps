@@ -43,6 +43,7 @@ alloy:
         prometheus.remote_write "default" {
           endpoint {
             url = "http://prometheus-server.argocd-apps.svc.cluster.local:9090/api/v1/write"
+            remote_timeout = 5m
           }
         }
 
