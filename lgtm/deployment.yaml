@@ -15,7 +15,8 @@ spec:
         app: lgtm
     spec:
       containers:
-      - image: grafana/otel-lgtm
+      - name: otel-lgtm
+        image: grafana/otel-lgtm
         ports:
         - containerPort: 3000
 ---
