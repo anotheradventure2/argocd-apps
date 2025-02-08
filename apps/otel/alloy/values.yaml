@@ -1,5 +1,7 @@
 alloy:
   stabilityLevel: "experimental"
+  controller:
+    type: "deployment"
   configMap:
     content: |-
       logging {
