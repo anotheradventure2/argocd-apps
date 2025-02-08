@@ -27,17 +27,13 @@ alloy:
               { "__address__" = "argocd-application-controller-metrics:8082" },
           ]
           metrics_path = "/metrics"
-          forward_to = [otelcol.exporter.prometheus.default.input]
+          forward_to = [prometheus.remote_write.default.receiver]
           job_name = "scraper.remote.node_exporter"
         }
 
         // EXPORTERS
         otelcol.exporter.debug "default" {
           verbosity = "detailed"
-        }
-
-        otelcol.exporter.prometheus "default" {
-          forward_to = [prometheus.remote_write.default.receiver]
         }
 
         prometheus.remote_write "default" {
