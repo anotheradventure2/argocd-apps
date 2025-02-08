@@ -1,56 +1,58 @@
 alloy:
-  stabilityLevel: "experimental"
-  controller:
-    type: "deployment"
-  configMap:
-    content: |-
-      logging {
-        level = "debug"
-      }
-
-      // INGESTION
-      otelcol.receiver.otlp "default" {
-        grpc { }
-
-        output {
-          metrics = [otelcol.exporter.prometheus.default.input, otelcol.exporter.debug.default.input]
-          traces  = [otelcol.exporter.otlp.tempo.input]
+  alloy:
+    stabilityLevel: "experimental"
+    controller:
+      type: "deployment"
+    configMap:
+      create: true
+      content: |
+        logging {
+          level = "debug"
         }
-      }
 
-      prometheus.scrape "prometheus" {
-        targets = [
-            { "__address__" = argocd-server-metrics:8083 },
-            { "__address__" = argocd-repo-server-metrics:8084 },
-            { "__address__" = argocd-application-controller-metrics:8082 }
-        ]
-        metrics_path = "/metrics"
-        forward_to = [prometheus.remote_write.default.receiver, otelcol.exporter.debug.default.input]
-        job_name = "scraper.remote.node_exporter"
-      }
+        // INGESTION
+        otelcol.receiver.otlp "default" {
+          grpc { }
 
-      // PROCESSING
-      otelcol.exporter.prometheus "default" {
-        forward_to = [prometheus.remote_write.default.receiver]
-      }
-
-      // EXPORTERS
-      otelcol.exporter.debug "default" {
-        verbosity = "detailed"
-      }
-
-      prometheus.remote_write "default" {
-        endpoint {
-          url = "http://prometheus:9090/api/v1/write"
-        }
-      }
-
-      otelcol.exporter.otlp "tempo" {
-        client {
-          endpoint = "tempo:4317"
-
-          tls {
-            insecure = true
+          output {
+            metrics = [otelcol.exporter.prometheus.default.input, otelcol.exporter.debug.default.input]
+            traces  = [otelcol.exporter.otlp.tempo.input]
           }
         }
-      }
+
+        prometheus.scrape "prometheus" {
+          targets = [
+              { "__address__" = argocd-server-metrics:8083 },
+              { "__address__" = argocd-repo-server-metrics:8084 },
+              { "__address__" = argocd-application-controller-metrics:8082 }
+          ]
+          metrics_path = "/metrics"
+          forward_to = [prometheus.remote_write.default.receiver, otelcol.exporter.debug.default.input]
+          job_name = "scraper.remote.node_exporter"
+        }
+
+        // PROCESSING
+        otelcol.exporter.prometheus "default" {
+          forward_to = [prometheus.remote_write.default.receiver]
+        }
+
+        // EXPORTERS
+        otelcol.exporter.debug "default" {
+          verbosity = "detailed"
+        }
+
+        prometheus.remote_write "default" {
+          endpoint {
+            url = "http://prometheus:9090/api/v1/write"
+          }
+        }
+
+        otelcol.exporter.otlp "tempo" {
+          client {
+            endpoint = "tempo:4317"
+
+            tls {
+              insecure = true
+            }
+          }
+        }
