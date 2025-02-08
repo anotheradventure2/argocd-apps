@@ -34,7 +34,7 @@ alloy:
         // PROCESSORS
         otelcol.receiver.prometheus "default" {
           output {
-            metrics = [otelcol.exporter.otlp.default.input, otelcol.exporter.debug.default.input]
+            metrics = [otelcol.exporter.prometheus.default.input, otelcol.exporter.debug.default.input]
           }
         }
 
