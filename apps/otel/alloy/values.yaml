@@ -27,14 +27,14 @@ alloy:
               { "__address__" = "argocd-application-controller-metrics.argocd.svc.cluster.local:8082" },
           ]
           metrics_path = "/metrics"
-          forward_to = [otelcol.receiver.prometheus.default.receiver]
+          forward_to = [otelcol.receiver.prometheus.default.receiver, prometheus.remote_write.default.receiver]
           job_name = "scraper.remote.node_exporter"
         }
 
         // PROCESSORS
         otelcol.receiver.prometheus "default" {
           output {
-            metrics = [otelcol.exporter.prometheus.default.input, otelcol.exporter.debug.default.input]
+            metrics = [otelcol.exporter.debug.default.input]
           }
         }
 
