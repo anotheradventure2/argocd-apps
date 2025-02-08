@@ -33,7 +33,7 @@ alloy:
 
         // PROCESSING
         otelcol.exporter.prometheus "default" {
-          forward_to = [prometheus.remote_write.default.receiver, otelcol.exporter.debug.default.input]
+          forward_to = [prometheus.remote_write.default.receiver
         }
 
         // EXPORTERS
