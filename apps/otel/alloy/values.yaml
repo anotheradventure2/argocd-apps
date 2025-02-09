@@ -15,43 +15,13 @@ alloy:
           grpc { }
 
           output {
-            // metrics = [otelcol.exporter.prometheus.default.input, otelcol.exporter.debug.default.input]
             traces  = [otelcol.exporter.otlp.tempo.input]
-          }
-        }
-
-        prometheus.scrape "prometheus" {
-          targets = [
-              { "__address__" = "argocd-server-metrics.argocd.svc.cluster.local:8083" },
-              { "__address__" = "argocd-repo-server-metrics.argocd.svc.cluster.local:8084" },
-              { "__address__" = "argocd-application-controller-metrics.argocd.svc.cluster.local:8082" },
-          ]
-          metrics_path = "/metrics"
-          forward_to = [otelcol.receiver.prometheus.default.receiver, prometheus.remote_write.default.receiver]
-          job_name = "scraper.remote.node_exporter"
-        }
-
-        // PROCESSORS
-        otelcol.receiver.prometheus "default" {
-          output {
-            metrics = [otelcol.exporter.debug.default.input]
           }
         }
 
         // EXPORTERS
         otelcol.exporter.debug "default" {
           verbosity = "detailed"
-        }
-
-        otelcol.exporter.prometheus "default" {
-          forward_to = [prometheus.remote_write.default.receiver]
-        }
-
-        prometheus.remote_write "default" {
-          endpoint {
-            url = "http://prometheus-server.argocd-apps.svc.cluster.local:9090/api/v1/write"
-            remote_timeout = "240s"
-          }
         }
 
         otelcol.exporter.otlp "tempo" {
