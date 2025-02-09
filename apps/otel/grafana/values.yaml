@@ -1,15 +1,15 @@
 grafana:
-  adminpassword: admin
+  adminPassword: admin
   datasources:
     datasources.yaml:
       apiVersion: 1
       datasources:
-        - name: Prometheus
+        - name: prometheus
           uid: prom
           type: prometheus
           url: http://prometheus-server.argocd-apps.svc
           isDefault: true
-        - name: Tempo
+        - name: tempo
           uid: tempo
           type: tempo
           url: http://tempo.argocd-apps.svc:3100
