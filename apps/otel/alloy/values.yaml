@@ -28,11 +28,6 @@ alloy:
         }
 
         // PROCESSORS
-        otelcol.receiver.prometheus "default" {
-          output {
-            metrics = [otelcol.exporter.debug.default.input, prometheus.remote_write.default.receiver]
-          }
-        }
 
         otelcol.connector.servicegraph "default" {
           dimensions = ["http.method", "http.target"]
@@ -44,6 +39,10 @@ alloy:
         // EXPORTERS
         otelcol.exporter.debug "default" {
           verbosity = "detailed"
+        }
+
+        otelcol.exporter.prometheus "default" {
+          forward_to = [prometheus.remote_write.default.receiver]
         }
 
         prometheus.remote_write "default" {
