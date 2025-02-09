@@ -2,7 +2,7 @@ alloy:
   alloy:
     stabilityLevel: "experimental"
     controller:
-      type: "deployment"
+      type: 'deployment'
     configMap:
       create: true
       content: |
@@ -50,7 +50,7 @@ alloy:
         prometheus.remote_write "default" {
           endpoint {
             url = "http://prometheus-server.argocd-apps.svc.cluster.local:9090/api/v1/write"
-            remote_timeout = "5m"
+            remote_timeout = "240s"
           }
         }
 

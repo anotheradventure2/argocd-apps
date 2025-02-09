@@ -8,3 +8,33 @@ prometheus:
     enabled: false
   prometheus-node-exporter:
     enabled: false
+  extraScrapeConfigs: |
+    - job_name: 'argocd-server'
+      metrics_path: /metrics
+      static_configs:
+        - targets:
+          - argocd-server-metrics.argocd.svc.cluster.local:8083
+    - job_name: 'argocd-repo-server'
+      metrics_path: /metrics
+      static_configs:
+        - targets:
+          - argocd-repo-server-metrics.argocd.svc.cluster.local:8084
+    - job_name: 'argocd-application-controller'
+      metrics_path: /metrics
+      static_configs:
+        - targets:
+          - argocd-application-controller-metrics.argocd.svc.cluster.local:8082
+  # - job_name: 'prometheus-blackbox-exporter'
+  #   metrics_path: /probe
+  #   params:
+  #     module: [http_2xx]
+  #   static_configs:
+  #     - targets:
+  #       - https://example.com
+  #   relabel_configs:
+  #     - source_labels: [__address__]
+  #       target_label: __param_target
+  #     - source_labels: [__param_target]
+  #       target_label: instance
+  #     - target_label: __address__
+  #       replacement: prometheus-blackbox-exporter:9115
