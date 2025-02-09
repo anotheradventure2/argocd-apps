@@ -12,7 +12,7 @@ grafana:
         - name: Tempo
           uid: tempo
           type: tempo
-          url: http://{{ .Release.Name }}-tempo-query-frontend:3100
+          url: http://tempo.argocd-apps.svc:3100
           isDefault: false
           jsonData:
             tracesToMetrics:
