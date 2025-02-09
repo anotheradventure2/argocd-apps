@@ -23,7 +23,7 @@ alloy:
 
           output {
             metrics = [otelcol.exporter.otlp.mimir.input]
-            traces  = [otelcol.exporter.otlp.tempo.input]
+            traces  = [otelcol.exporter.otlp.tempo.input, otelcol.connector.servicegraph.default.input]
           }
         }
 
@@ -42,6 +42,13 @@ alloy:
         otelcol.receiver.prometheus "default" {
           output {
             metrics = [otelcol.exporter.debug.default.input, otelcol.exporter.otlp.mimir.input]
+          }
+        }
+
+        otelcol.connector.servicegraph "default" {
+          dimensions = ["http.method", "http.target"]
+          output {
+            metrics = [otelcol.exporter.otlp.tempo.input]
           }
         }
 
