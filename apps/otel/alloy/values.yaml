@@ -15,13 +15,42 @@ alloy:
           grpc { }
 
           output {
+            metrics = [otelcol.exporter.otlp.mimir.input]
             traces  = [otelcol.exporter.otlp.tempo.input]
+          }
+        }
+
+        prometheus.scrape "prometheus" {
+          targets = [
+              { "__address__" = "argocd-server-metrics.argocd.svc.cluster.local:8083" },
+              { "__address__" = "argocd-repo-server-metrics.argocd.svc.cluster.local:8084" },
+              { "__address__" = "argocd-application-controller-metrics.argocd.svc.cluster.local:8082" },
+          ]
+          metrics_path = "/metrics"
+          forward_to = [otelcol.receiver.prometheus.default.receiver]
+          job_name = "scraper.remote.node_exporter"
+        }
+
+        // PROCESSORS
+        otelcol.receiver.prometheus "default" {
+          output {
+            metrics = [otelcol.exporter.debug.default.input, otelcol.exporter.otlp.mimir.input]
           }
         }
 
         // EXPORTERS
         otelcol.exporter.debug "default" {
           verbosity = "detailed"
+        }
+
+        otelcol.exporter.otlp "mimir" {
+          client {
+            endpoint = "http://mimir-nginx/api/v1/push"
+
+            tls {
+              insecure = true
+            }
+          }
         }
 
         otelcol.exporter.otlp "tempo" {
