@@ -8,6 +8,10 @@ prometheus:
     enabled: false
   prometheus-node-exporter:
     enabled: false
+  alertmanager:
+    enabled: false
+  prometheus-pushgateway:
+    enabled: true
   extraScrapeConfigs: |
     - job_name: 'argocd-server'
       metrics_path: /metrics
