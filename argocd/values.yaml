@@ -1,6 +1,5 @@
 configs:
   params:
-    # -- Open-Telemetry collector address: (e.g. "otel-collector:4317")
     otlp.address: 'alloy.argocd-apps.svc.cluster.local:4317'
 controller:
   metrics:

@@ -11,7 +11,7 @@ prometheus:
   alertmanager:
     enabled: false
   prometheus-pushgateway:
-    enabled: true
+    enabled: false
   extraScrapeConfigs: |
     - job_name: 'argocd-server'
       metrics_path: /metrics
