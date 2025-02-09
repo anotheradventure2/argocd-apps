@@ -5,8 +5,10 @@ alloy:
       type: 'deployment'
     extraPorts:
       - name: "grpc"
+        port: 4317
         targetPort: 4317
       - name: "http"
+        port: 4318
         targetPort: 4318
     configMap:
       create: true
