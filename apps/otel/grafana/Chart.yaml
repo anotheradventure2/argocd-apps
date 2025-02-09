@@ -1,11 +1,11 @@
 apiVersion: v2
-name: grafana
+name: grafana-wrapper
 description: A Helm chart for Kubernetes
 type: application
 version: 8.9.0
 appVersion: 11.5.1
 dependencies:
   - name: grafana
-    alias: grafana-dep
+    alias: grafana
     version: 8.9.0
     repository: "https://grafana.github.io/helm-charts"
