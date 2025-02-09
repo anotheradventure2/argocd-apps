@@ -54,7 +54,7 @@ alloy:
 
         otelcol.exporter.otlp "tempo" {
           client {
-            endpoint = "http://tempo.argocd-apps.svc:4317"
+            endpoint = "tempo:4317"
 
             tls {
               insecure = true
