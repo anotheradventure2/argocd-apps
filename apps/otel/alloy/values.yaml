@@ -22,6 +22,7 @@ alloy:
           grpc { }
 
           output {
+            logs = [otelcol.exporter.otlp.loki.input]
             metrics = [otelcol.exporter.prometheus.default.input]
             traces  = [otelcol.exporter.otlp.tempo.input, otelcol.connector.servicegraph.default.input]
           }
@@ -59,5 +60,11 @@ alloy:
             tls {
               insecure = true
             }
+          }
+        }
+
+        otelcol.exporter.otlp "loki" {
+          client {
+            endpoint = "http://loki.argocd-apps.svc:3100/otlp"
           }
         }
