@@ -3,6 +3,8 @@ configs:
     otlp.address: 'alloy.argocd-apps.svc.cluster.local:4317'
   cm:
     timeout.reconciliation: 60s
+  secret:
+    argocdServerAdminPassword: '$2a$10$JoLQ18GPi/HRWjoibw1PierKicQ8TWIWzMDp9mIXrI/YyZnQjoVOS'
 controller:
   metrics:
     enabled: true
