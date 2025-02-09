@@ -1,6 +1,6 @@
-grafana:
+# grafana:
   # -- Deploy Grafana if enabled. See [upstream readme](https://github.com/grafana/helm-charts/tree/main/charts/grafana#configuration) for full values reference.
-  enabled: true
+  # enabled: true
   # datasources:
   #   datasources.yaml:
   #     apiVersion: 1
