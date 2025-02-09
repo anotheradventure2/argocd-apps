@@ -1,0 +1,31 @@
+grafana-dep:
+  # -- Deploy Grafana if enabled. See [upstream readme](https://github.com/grafana/helm-charts/tree/main/charts/grafana#configuration) for full values reference.
+  enabled: true
+  # datasources:
+  #   datasources.yaml:
+  #     apiVersion: 1
+  #     datasources:
+  #       - name: Loki
+  #         uid: loki
+  #         type: loki
+  #         url: http://{{ .Release.Name }}-loki-gateway
+  #         isDefault: false
+  #       - name: Mimir
+  #         uid: prom
+  #         type: prometheus
+  #         url: http://{{ .Release.Name }}-mimir-nginx/prometheus
+  #         isDefault: true
+  #       - name: Tempo
+  #         uid: tempo
+  #         type: tempo
+  #         url: http://{{ .Release.Name }}-tempo-query-frontend:3100
+  #         isDefault: false
+  #         jsonData:
+  #           tracesToLogsV2:
+  #             datasourceUid: loki
+  #           lokiSearch:
+  #             datasourceUid: loki
+  #           tracesToMetrics:
+  #             datasourceUid: prom
+  #           serviceMap:
+  #             datasourceUid: prom
