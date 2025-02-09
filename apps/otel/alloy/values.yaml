@@ -3,6 +3,11 @@ alloy:
     stabilityLevel: "experimental"
     controller:
       type: 'deployment'
+    extraPorts:
+      - name: "grpc"
+        targetPort: 4317
+      - name: "http"
+        targetPort: 4318
     configMap:
       create: true
       content: |

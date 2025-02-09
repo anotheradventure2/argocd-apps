@@ -1,6 +1,6 @@
 configs:
   params:
-    otlp.address: 'alloy.argocd-apps.svc.cluster.local:4317'
+    otlp.address: 'alloy.argocd-apps.svc:4317'
   cm:
     timeout.reconciliation: 60s
   secret:
