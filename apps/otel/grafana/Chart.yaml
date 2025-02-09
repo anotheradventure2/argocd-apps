@@ -5,6 +5,7 @@ type: application
 version: 8.9.0
 appVersion: 11.5.1
 dependencies:
-  - name: grafana-dep
+  - name: grafana
+    alias: grafana-dep
     version: 8.9.0
     repository: "https://grafana.github.io/helm-charts"
